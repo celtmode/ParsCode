@@ -1,0 +1,658 @@
+/**
+ * ParsCode Theme - Client Styles
+ * Component styles, animations, and theme-specific overrides
+ */
+
+/* ============================================================================
+   Theme Settings Panel
+   ============================================================================ */
+
+.pc-theme-settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pc-spacing-lg);
+  padding: var(--pc-spacing-md);
+}
+
+.pc-section-title {
+  font-size: var(--pc-font-size-lg);
+  font-weight: 600;
+  color: var(--pc-text-primary);
+  margin: 0;
+}
+
+.pc-section-desc {
+  font-size: var(--pc-font-size-sm);
+  color: var(--pc-text-secondary);
+  margin: 0 0 var(--pc-spacing-md);
+}
+
+.pc-setting-row {
+  display: flex;
+  align-items: center;
+  gap: var(--pc-spacing-md);
+  padding: var(--pc-spacing-sm) 0;
+}
+
+.pc-setting-row-checkbox {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.pc-setting-label {
+  min-width: 160px;
+  font-size: var(--pc-font-size-base);
+  color: var(--pc-text-primary);
+  font-weight: 500;
+}
+
+.pc-setting-value {
+  min-width: 60px;
+  text-align: right;
+  font-size: var(--pc-font-size-sm);
+  color: var(--pc-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.pc-select {
+  flex: 1;
+  max-width: 280px;
+  padding: var(--pc-spacing-xs) var(--pc-spacing-sm);
+  background: var(--pc-surface-1);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-md);
+  color: var(--pc-text-primary);
+  font-size: var(--pc-font-size-base);
+  font-family: var(--pc-font-ui);
+  cursor: pointer;
+  transition: border-color var(--pc-transition-fast), box-shadow var(--pc-transition-fast);
+}
+
+.pc-select:hover {
+  border-color: var(--pc-accent);
+}
+
+.pc-select:focus {
+  outline: none;
+  border-color: var(--pc-accent);
+  box-shadow: 0 0 0 2px var(--pc-glow-color);
+}
+
+.pc-slider {
+  flex: 1;
+  max-width: 280px;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--pc-surface-2);
+  border-radius: var(--pc-radius-full);
+  outline: none;
+  cursor: pointer;
+}
+
+.pc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--pc-accent);
+  border-radius: var(--pc-radius-full);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform var(--pc-transition-fast), box-shadow var(--pc-transition-fast);
+}
+
+.pc-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px var(--pc-glow-color);
+}
+
+.pc-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--pc-accent);
+  border: none;
+  border-radius: var(--pc-radius-full);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pc-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--pc-accent);
+  cursor: pointer;
+}
+
+.pc-button {
+  padding: var(--pc-spacing-xs) var(--pc-spacing-md);
+  border-radius: var(--pc-radius-md);
+  font-size: var(--pc-font-size-base);
+  font-family: var(--pc-font-ui);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--pc-transition-fast);
+  border: 1px solid transparent;
+}
+
+.pc-button-secondary {
+  background: var(--pc-surface-1);
+  color: var(--pc-text-primary);
+  border-color: var(--pc-border);
+}
+
+.pc-button-secondary:hover {
+  background: var(--pc-surface-2);
+  border-color: var(--pc-accent);
+}
+
+/* ============================================================================
+   Theme Selector (Header/Toolbar)
+   ============================================================================ */
+
+.pc-theme-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--pc-spacing-sm);
+}
+
+.pc-theme-selector-label {
+  font-size: var(--pc-font-size-sm);
+  color: var(--pc-text-secondary);
+  white-space: nowrap;
+}
+
+.pc-theme-selector-select {
+  padding: var(--pc-spacing-xs) var(--pc-spacing-sm);
+  background: var(--pc-surface-1);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-md);
+  color: var(--pc-text-primary);
+  font-size: var(--pc-font-size-sm);
+  font-family: var(--pc-font-ui);
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.pc-theme-selector-select:hover {
+  border-color: var(--pc-accent);
+}
+
+.pc-theme-selector-select:focus {
+  outline: none;
+  border-color: var(--pc-accent);
+  box-shadow: 0 0 0 2px var(--pc-glow-color);
+}
+
+/* ============================================================================
+   Faravahar Logo
+   ============================================================================ */
+
+.pc-faravahar {
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform var(--pc-transition-normal), filter var(--pc-transition-normal);
+}
+
+.pc-faravahar:hover {
+  filter: drop-shadow(0 0 8px var(--pc-glow-color));
+}
+
+.pc-faravahar-animated .pc-faravahar-wings {
+  animation: parscode-wing-sweep 3s ease-in-out infinite;
+  transform-origin: center;
+  filter: url(#goldGlow);
+}
+
+.pc-faravahar-animated .pc-faravahar-body {
+  animation: parscode-glow-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.pc-faravahar-animated .pc-faravahar-ring {
+  animation: parscode-gold-sweep 4s linear infinite;
+  transform-origin: center;
+}
+
+/* Monochrome variant */
+.pc-faravahar-mono {
+  color: var(--pc-text-primary);
+}
+
+.pc-faravahar-mono:hover {
+  color: var(--pc-accent);
+}
+
+/* Mark variant (small, simplified) */
+.pc-faravahar-mark {
+  width: 1em;
+  height: 1em;
+}
+
+/* ============================================================================
+   Animated Backgrounds
+   ============================================================================ */
+
+/* Aurora background */
+.pc-aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pc-aurora-layer {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: parscode-aurora-float 20s ease-in-out infinite;
+}
+
+.pc-aurora-layer-1 {
+  width: 60%;
+  height: 60%;
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle, var(--pc-accent-light) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.pc-aurora-layer-2 {
+  width: 50%;
+  height: 50%;
+  bottom: -15%;
+  right: -15%;
+  background: radial-gradient(circle, var(--pc-accent) 0%, transparent 70%);
+  animation-delay: -7s;
+}
+
+.pc-aurora-layer-3 {
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+  background: radial-gradient(circle, var(--pc-accent-deep) 0%, transparent 70%);
+  animation-delay: -14s;
+}
+
+@keyframes parscode-aurora-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(2%, -2%) scale(1.05);
+  }
+  50% {
+    transform: translate(-1%, 3%) scale(0.95);
+  }
+  75% {
+    transform: translate(3%, 1%) scale(1.02);
+  }
+}
+
+/* Particles background */
+.pc-particles-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pc-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--pc-accent);
+  opacity: 0.3;
+  animation: parscode-particle-float var(--pc-particle-duration, 20s) ease-in-out infinite;
+  animation-delay: var(--pc-particle-delay, 0s);
+}
+
+@keyframes parscode-particle-float {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(var(--pc-particle-dx, 20px), var(--pc-particle-dy, -20px));
+    opacity: 0.1;
+  }
+}
+
+/* ============================================================================
+   Theme Provider
+   ============================================================================ */
+
+.pc-theme-provider {
+  min-height: 100vh;
+  background: var(--pc-bg);
+  color: var(--pc-text-primary);
+  font-family: var(--pc-font-ui);
+  transition: background-color var(--pc-transition-slow), color var(--pc-transition-slow);
+}
+
+/* ============================================================================
+   Global Theme Overrides
+   ============================================================================ */
+
+/* Focus rings */
+:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--pc-focus-ring) !important;
+}
+
+/* Selection */
+::selection {
+  background: var(--pc-accent);
+  color: var(--pc-bg);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pc-surface-1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pc-border);
+  border-radius: var(--pc-radius-full);
+  border: 2px solid var(--pc-surface-1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pc-accent);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--pc-border) var(--pc-surface-1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pc-faravahar-animated *,
+  .pc-aurora-layer,
+  .pc-particle {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  * {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
+/* ============================================================================
+   Component Enhancements (Gold Accents)
+   ============================================================================ */
+
+/* Buttons */
+button[class*="primary"],
+.pc-button-primary {
+  background: linear-gradient(135deg, var(--pc-accent) 0%, var(--pc-accent-deep) 100%) !important;
+  border: none !important;
+  color: var(--pc-bg) !important;
+  box-shadow: 0 2px 8px var(--pc-glow-color) !important;
+}
+
+button[class*="primary"]:hover,
+.pc-button-primary:hover {
+  box-shadow: 0 4px 16px var(--pc-glow-color) !important;
+  transform: translateY(-1px);
+}
+
+button[class*="primary"]:active,
+.pc-button-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--pc-glow-color) !important;
+}
+
+/* Inputs */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--pc-accent) !important;
+  box-shadow: 0 0 0 2px var(--pc-glow-color) !important;
+}
+
+/* Links */
+a {
+  color: var(--pc-accent-light);
+  transition: color var(--pc-transition-fast);
+}
+
+a:hover {
+  color: var(--pc-accent);
+  text-decoration: none;
+}
+
+/* Cards/Panels */
+[class*="card"],
+[class*="panel"],
+[class*="surface"] {
+  background: var(--pc-surface-1) !important;
+  border: 1px solid var(--pc-border) !important;
+  border-radius: var(--pc-radius-panel) !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 1px var(--pc-border) !important;
+}
+
+[class*="card"]:hover,
+[class*="panel"]:hover {
+  border-color: var(--pc-accent) !important;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px var(--pc-accent) !important;
+}
+
+/* Modals/Dialogs */
+[role="dialog"],
+[class*="modal"],
+[class*="dialog"] {
+  background: var(--pc-surface-2) !important;
+  border: 1px solid var(--pc-border) !important;
+  border-radius: var(--pc-radius-panel) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--pc-border),
+    0 0 24px var(--pc-glow-color) !important;
+  backdrop-filter: blur(16px);
+}
+
+/* Tooltips */
+[class*="tooltip"],
+[class*="popover"] {
+  background: var(--pc-surface-2) !important;
+  border: 1px solid var(--pc-border) !important;
+  border-radius: var(--pc-radius-md) !important;
+  color: var(--pc-text-primary) !important;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 1px var(--pc-border) !important;
+}
+
+/* Dropdowns/Menus */
+[role="menu"],
+[class*="dropdown"],
+[class*="menu"] {
+  background: var(--pc-surface-2) !important;
+  border: 1px solid var(--pc-border) !important;
+  border-radius: var(--pc-radius-md) !important;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px var(--pc-border) !important;
+}
+
+[role="menuitem"]:hover,
+[class*="menu-item"]:hover {
+  background: var(--pc-accent) !important;
+  color: var(--pc-bg) !important;
+}
+
+/* Tabs */
+[role="tab"][aria-selected="true"],
+[class*="tab"][class*="active"] {
+  color: var(--pc-accent) !important;
+  border-bottom-color: var(--pc-accent) !important;
+}
+
+/* Progress bars */
+progress,
+[role="progressbar"] {
+  accent-color: var(--pc-accent) !important;
+}
+
+/* Toggle/Switch */
+input[type="checkbox"][class*="switch"],
+input[type="checkbox"][class*="toggle"] {
+  accent-color: var(--pc-accent) !important;
+}
+
+/* Badge */
+[class*="badge"],
+[class*="tag"] {
+  background: var(--pc-accent) !important;
+  color: var(--pc-bg) !important;
+}
+
+/* ============================================================================
+   Shimmer Skeleton
+   ============================================================================ */
+
+.pc-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--pc-surface-1) 25%,
+    var(--pc-surface-2) 50%,
+    var(--pc-surface-1) 75%
+  );
+  background-size: 200% 100%;
+  animation: parscode-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--pc-radius-md);
+}
+
+/* ============================================================================
+   Loading Spinner
+   ============================================================================ */
+
+.pc-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--pc-border);
+  border-top-color: var(--pc-accent);
+  border-radius: 50%;
+  animation: parscode-spin 0.8s linear infinite;
+}
+
+@keyframes parscode-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================================
+   Typography Enhancements
+   ============================================================================ */
+
+.pc-text-gradient {
+  background: linear-gradient(135deg, var(--pc-accent-light) 0%, var(--pc-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pc-heading {
+  font-family: var(--pc-font-brand);
+  font-weight: 600;
+  color: var(--pc-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.pc-code {
+  font-family: var(--pc-font-code);
+  font-size: 0.9em;
+  background: var(--pc-surface-2);
+  padding: 0.15em 0.4em;
+  border-radius: var(--pc-radius-sm);
+  border: 1px solid var(--pc-border);
+}
+
+/* ============================================================================
+   Density Variants
+   ============================================================================ */
+
+[data-pc-density="compact"] {
+  --pc-spacing-xs: 3px;
+  --pc-spacing-sm: 6px;
+  --pc-spacing-md: 9px;
+  --pc-spacing-lg: 12px;
+  --pc-spacing-xl: 18px;
+  --pc-spacing-2xl: 24px;
+  --pc-spacing-3xl: 36px;
+}
+
+[data-pc-density="spacious"] {
+  --pc-spacing-xs: 6px;
+  --pc-spacing-sm: 12px;
+  --pc-spacing-md: 18px;
+  --pc-spacing-lg: 24px;
+  --pc-spacing-xl: 36px;
+  --pc-spacing-2xl: 48px;
+  --pc-spacing-3xl: 72px;
+}
+
+/* ============================================================================
+   Background Style Variants
+   ============================================================================ */
+
+[data-pc-background="aurora"] .pc-aurora-bg {
+  display: block;
+}
+
+[data-pc-background="particles"] .pc-particles-bg {
+  display: block;
+}
+
+[data-pc-background="solid"] .pc-aurora-bg,
+[data-pc-background="solid"] .pc-particles-bg {
+  display: none;
+}
+
+/* ============================================================================
+   RTL Support (Persian)
+   ============================================================================ */
+
+[dir="rtl"] {
+  font-family: var(--pc-font-ui);
+}
+
+[dir="rtl"] .pc-setting-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pc-theme-selector {
+  flex-direction: row-reverse;
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  .pc-faravahar-animated *,
+  .pc-aurora-layer,
+  .pc-particle,
+  .pc-spinner {
+    animation: none !important;
+  }
+
+  .pc-theme-selector,
+  .pc-theme-settings .pc-button {
+    display: none;
+  }
+}

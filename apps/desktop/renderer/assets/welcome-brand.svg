@@ -1,0 +1,41 @@
+<svg width="472" height="40" viewBox="0 0 472 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8860B"/>
+      <stop offset="50%" stop-color="#F5D27A"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Faravahar logo (left) -->
+  <g transform="translate(20, 4) scale(0.35)" filter="url(#goldGlow)">
+    <path d="M60 128 Q30 100 45 65 Q65 75 75 90 Q70 110 60 128 Z" fill="url(#goldGradient)"/>
+    <path d="M196 128 Q226 100 211 65 Q191 75 181 90 Q186 110 196 128 Z" fill="url(#goldGradient)"/>
+    <circle cx="128" cy="128" r="30" fill="url(#goldGradient)"/>
+    <circle cx="128" cy="128" r="19" fill="none" stroke="url(#goldGradient)" stroke-width="1" stroke-dasharray="4 2"/>
+    <g transform="translate(128, 128)" fill="url(#goldGradient)">
+      <circle cx="0" cy="-25" r="8"/>
+      <path d="M0 -17 Q-6 -5 -4 5 Q0 10 4 5 Q6 -5 0 -17 Z"/>
+      <path d="M-5 5 Q-7 12 0 22 Q7 12 5 5 Z"/>
+    </g>
+    <circle cx="128" cy="55" r="12" fill="none" stroke="url(#goldGradient)" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <g fill="url(#goldGradient)">
+      <circle cx="50" cy="85" r="2"/>
+      <circle cx="58" cy="72" r="1.5"/>
+      <circle cx="198" cy="85" r="2"/>
+      <circle cx="190" cy="72" r="1.5"/>
+      <circle cx="50" cy="170" r="1.5"/>
+      <circle cx="198" cy="170" r="1.5"/>
+    </g>
+  </g>
+
+  <!-- ParsCode text (right of logo) -->
+  <text x="60" y="28" font-family="Montserrat, Inter, -apple-system, sans-serif" font-weight="600" font-size="22" fill="url(#goldGradient)" letter-spacing="-0.5px">ParsCode</text>
+</svg>

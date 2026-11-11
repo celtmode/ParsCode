@@ -1,0 +1,51 @@
+{
+  "name": "@parscode/theme",
+  "version": "0.2.2-rc.1",
+  "description": "ParsCode black+gold animated design system with design tokens, components, and theme registration",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/types/**/*.d.ts",
+    "lib/client.js",
+    "lib/types/client/**/*.d.ts",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@parscode/brand": "workspace:*",
+    "@deepseek-ai/cordis": "workspace:~",
+    "@deepseek-ai/dsh-client-ui-theme": "workspace:*"
+  },
+  "devDependencies": {
+    "@parscode/theme": "workspace:*",
+    "typescript": "^6.0.3",
+    "tsdown": "^0.22.2"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:~"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-theme"]
+    }
+  }
+}

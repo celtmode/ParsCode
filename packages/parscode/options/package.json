@@ -1,0 +1,67 @@
+{
+  "name": "@parscode/options",
+  "version": "0.2.2-rc.1",
+  "description": "ParsCode comprehensive settings UI with typed schema validation, import/export, and organized categories",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./schemas": "./schemas",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/types/**/*.d.ts",
+    "lib/client.js",
+    "lib/types/client/**/*.d.ts",
+    "schemas/**/*.json",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@parscode/brand": "workspace:*",
+    "@parscode/theme": "workspace:*",
+    "@deepseek-ai/cordis": "workspace:~",
+    "@deepseek-ai/dsh-settings": "workspace:*",
+    "@deepseek-ai/dsh-config-editor": "workspace:*",
+    "@deepseek-ai/dsh-credentials-local": "workspace:*",
+    "@deepseek-ai/dsh-llm-pi-ai": "workspace:*",
+    "@deepseek-ai/dsh-llm-deepseek-api-key": "workspace:*",
+    "@deepseek-ai/dsh-shell-env": "workspace:*",
+    "@deepseek-ai/dsh-sandbox-policy": "workspace:*",
+    "@deepseek-ai/dsh-user-approval": "workspace:*",
+    "@deepseek-ai/dsh-plugin-manager": "workspace:*",
+    "@deepseek-ai/dsh-app-boot": "workspace:*",
+    "@deepseek-ai/dsh-home-paths": "workspace:*",
+    "@deepseek-ai/dsh-atomic-write": "workspace:*",
+    "zod": "4.4.3",
+    "semver": "^7.8.5"
+  },
+  "devDependencies": {
+    "@parscode/options": "workspace:*",
+    "typescript": "^6.0.3",
+    "tsdown": "^0.22.2"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:~"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-settings", "@deepseek-ai/dsh-config-editor", "@parscode/theme"]
+    }
+  }
+}

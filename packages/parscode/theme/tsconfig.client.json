@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig.base.client.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types/client",
+    "composite": true,
+    "references": [
+      { "path": "../../../vendor/cordis" },
+      { "path": "../../../vendor/schemastery" },
+      { "path": "../brand" }
+    ]
+  },
+  "include": ["src/client/**/*"],
+  "exclude": ["node_modules", "lib", "tests"]
+}

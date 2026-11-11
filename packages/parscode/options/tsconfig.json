@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "composite": true,
+    "references": [
+      { "path": "../../../vendor/cordis" },
+      { "path": "../../../vendor/schemastery" },
+      { "path": "../brand" },
+      { "path": "../theme" }
+    ]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "lib", "tests", "schemas"]
+}

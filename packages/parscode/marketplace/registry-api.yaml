@@ -1,0 +1,337 @@
+openapi: 3.0.3
+info:
+  title: ParsCode Plugin Registry API
+  version: 1.0.0
+  description: |
+    Plugin registry API for ParsCode marketplace.
+    Hostable as static JSON on GitHub Pages at `https://celtmode.github.io/ParsCode-registry/v1`.
+  contact:
+    name: ParsCode Team
+    url: https://github.com/celtmode/ParsCode
+servers:
+  - url: https://celtmode.github.io/ParsCode-registry/v1
+    description: Default static registry (GitHub Pages)
+  - url: https://registry.parscode.io/v1
+    description: Official ParsCode registry (future)
+  - url: http://localhost:3081/v1
+    description: Local mock registry
+
+paths:
+  /plugins:
+    get:
+      summary: List plugins with search, filtering, and pagination
+      operationId: listPlugins
+      parameters:
+        - name: query
+          in: query
+          schema:
+            type: string
+          description: Search query (matches name, description, author, keywords)
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: Filter by category slug
+        - name: tag
+          in: query
+          schema:
+            type: string
+          description: Filter by tag
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [relevance, downloads, rating, updated, created, name]
+            default: relevance
+          description: Sort order
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          description: Results per page
+      responses:
+        '200':
+          description: Plugin list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginListResponse'
+
+  /plugins/{id}:
+    get:
+      summary: Get plugin details
+      operationId: getPlugin
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Plugin ID (npm package name)
+      responses:
+        '200':
+          description: Plugin details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginDetail'
+        '404':
+          description: Plugin not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /plugins/{id}/versions/{version}:
+    get:
+      summary: Get specific version details
+      operationId: getPluginVersion
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Exact version (semver)
+      responses:
+        '200':
+          description: Version details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginVersionDetail'
+        '404':
+          description: Version not found
+
+  /featured:
+    get:
+      summary: Get featured plugins
+      operationId: getFeatured
+      responses:
+        '200':
+          description: Featured plugins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeaturedPlugin'
+
+  /categories:
+    get:
+      summary: Get all categories
+      operationId: getCategories
+      responses:
+        '200':
+          description: Category list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+
+components:
+  schemas:
+    PluginListResponse:
+      type: object
+      required: [plugins, pagination]
+      properties:
+        plugins:
+          type: array
+          items:
+            $ref: '#/components/schemas/PluginSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    PluginSummary:
+      type: object
+      required: [id, name, description, version, author, downloads, rating, categories, tags, updated_at]
+      properties:
+        id:
+          type: string
+          description: npm package name (e.g., @parscode/plugin-git)
+        name:
+          type: string
+          description: Display name
+        description:
+          type: string
+          description: One-line description
+        version:
+          type: string
+          description: Latest version
+        author:
+          type: string
+        downloads:
+          type: integer
+          description: Total downloads
+        rating:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 5
+        categories:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        updated_at:
+          type: string
+          format: date-time
+        icon_url:
+          type: string
+          format: uri
+          nullable: true
+
+    PluginDetail:
+      allOf:
+        - $ref: '#/components/schemas/PluginSummary'
+        - type: object
+          required: [readme, versions, repository, homepage, license, min_app_version, permissions]
+          properties:
+            readme:
+              type: string
+              description: Full README markdown
+            versions:
+              type: array
+              items:
+                $ref: '#/components/schemas/PluginVersionSummary'
+            repository:
+              type: string
+              format: uri
+            homepage:
+              type: string
+              format: uri
+              nullable: true
+            license:
+              type: string
+            min_app_version:
+              type: string
+              description: Minimum ParsCode version required
+            permissions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Permission'
+
+    PluginVersionSummary:
+      type: object
+      required: [version, published_at, downloads, changelog]
+      properties:
+        version:
+          type: string
+        published_at:
+          type: string
+          format: date-time
+        downloads:
+          type: integer
+        changelog:
+          type: string
+          nullable: true
+
+    PluginVersionDetail:
+      type: object
+      required: [download_url, sha256, signature, size, min_app_version, permissions]
+      properties:
+        download_url:
+          type: string
+          format: uri
+          description: Direct download URL for the plugin tarball
+        sha256:
+          type: string
+          pattern: '^[a-f0-9]{64}$'
+          description: SHA-256 checksum of the tarball
+        signature:
+          type: string
+          nullable: true
+          description: Ed25519 signature of the tarball (base64)
+        size:
+          type: integer
+          description: Tarball size in bytes
+        min_app_version:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+
+    FeaturedPlugin:
+      type: object
+      required: [id, name, description, reason]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        reason:
+          type: string
+          description: Why this plugin is featured
+
+    Category:
+      type: object
+      required: [slug, name, description, plugin_count]
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        plugin_count:
+          type: integer
+
+    Pagination:
+      type: object
+      required: [page, per_page, total, total_pages]
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+
+    Permission:
+      type: object
+      required: [name, description, required]
+      properties:
+        name:
+          type: string
+          enum: [filesystem, network, shell, secrets, clipboard, notifications, native_modules]
+        description:
+          type: string
+        required:
+          type: boolean
+          description: Whether this permission is required for basic functionality
+
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
